@@ -1,14 +1,31 @@
 import React, { useState } from "react";
 import "./Register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerInitiate } from "../../redux/action";
+import { connect } from "react-redux";
+import { useEffect } from "react";
 
-const Register = () => {
+const Register = (props) => {
+   // console.log(props);
+   const { registerInitiate, data } = props;
+
    const [email, setEmail] = useState();
    const [password, setPassword] = useState();
 
+   const navigate = useNavigate();
+
    const register = (e) => {
       e.preventDefault();
+      registerInitiate(email, password);
+      setEmail("");
+      setPassword("");
    };
+
+   useEffect(() => {
+      if (data.user) {
+         navigate("/");
+      }
+   }, [data.user]);
 
    return (
       <div className="register">
@@ -42,4 +59,4 @@ const Register = () => {
    );
 };
 
-export default Register;
+export default connect((s) => s, { registerInitiate })(Register);

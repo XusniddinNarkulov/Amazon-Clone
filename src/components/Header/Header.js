@@ -4,8 +4,19 @@ import SearchIcon from "@mui/icons-material/Search";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logoutInitiate } from "../../redux/action";
 
-const Header = () => {
+const Header = (props) => {
+   const { logoutInitiate } = props;
+   const { user } = props.data;
+
+   const signOut = () => {
+      if (user) {
+         logoutInitiate();
+      }
+   };
+
    return (
       <nav className="header">
          <Link to="/">
@@ -30,12 +41,26 @@ const Header = () => {
             <SearchIcon className="searchIcon" />
          </div>
          <div className="header-nav">
-            <Link to="/login" className="header-link">
+            {user ? (
                <div className="header-option">
-                  <span className="header-option1">Hello Guest</span>
-                  <span className="header-option2">Sign In</span>
+                  <span className="header-option1">Hello, {user.email}</span>
+                  <span
+                     className="header-option2"
+                     onClick={signOut}
+                     style={{ cursor: "pointer" }}
+                  >
+                     Sign Out
+                  </span>
                </div>
-            </Link>
+            ) : (
+               <Link to="/login" className="header-link">
+                  <div className="header-option">
+                     <span className="header-option1">Hello, Guest</span>
+                     <span className="header-option2">Sign In</span>
+                  </div>
+               </Link>
+            )}
+
             <Link to="/orders" className="header-link">
                <div className="header-option">
                   <span className="header-option1">Returns</span>
@@ -53,4 +78,4 @@ const Header = () => {
    );
 };
 
-export default Header;
+export default connect((s) => s, { logoutInitiate })(Header);

@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import AmazonLogo from "../../amazon-resource/Amazon_Logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { loginInitiate } from "../../redux/action";
+import { NavigateBefore } from "@mui/icons-material";
 
-const Login = () => {
+const Login = (props) => {
+   const { loginInitiate, data } = props;
    const [email, setEmail] = useState();
    const [password, setPassword] = useState();
+   const navigate = useNavigate();
 
    const signIn = (e) => {
       e.preventDefault();
+      loginInitiate(email, password);
+      setEmail("");
+      setPassword("");
    };
+
+   useEffect(() => {
+      if (data.user) {
+         navigate("/");
+      }
+   }, [data.user]);
 
    return (
       <div className="login">
@@ -49,4 +63,4 @@ const Login = () => {
    );
 };
 
-export default Login;
+export default connect((s) => s, { loginInitiate })(Login);
