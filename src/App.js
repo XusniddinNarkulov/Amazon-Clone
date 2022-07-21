@@ -8,6 +8,7 @@ import { setUser } from "./redux/action";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { auth } from "./utils/firebase";
+import SingleProduct from "./pages/SingleProduct/SingleProduct";
 
 function App(props) {
    const { setUser } = props;
@@ -26,10 +27,12 @@ function App(props) {
       <BrowserRouter>
          <div className="App">
             <Header />
+            {/* <SingleProduct /> */}
             <Routes>
                <Route path="/" element={<Home />} />
                <Route path="/login" element={<Login />} />
                <Route path="/register" element={<Register />} />
+               <Route path="/products/:id" element={<SingleProduct />} />
             </Routes>
          </div>
       </BrowserRouter>

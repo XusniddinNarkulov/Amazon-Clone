@@ -9,7 +9,7 @@ import { logoutInitiate } from "../../redux/action";
 
 const Header = (props) => {
    const { logoutInitiate } = props;
-   const { user } = props.data;
+   const { user, basket } = props.data;
 
    const signOut = () => {
       if (user) {
@@ -70,7 +70,9 @@ const Header = (props) => {
             <Link to="/checkout" className="header-link">
                <div className="header-basket">
                   <ShoppingCartOutlinedIcon />
-                  <span className="header-option2 basket-count">0</span>
+                  <span className="header-option2 basket-count">
+                     {basket.length}
+                  </span>
                </div>
             </Link>
          </div>

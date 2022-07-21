@@ -1,5 +1,6 @@
 import { auth } from "../utils/firebase";
 import {
+   ADD_TO_BASKET,
    LOGIN_FAIL,
    LOGIN_START,
    LOGIN_SUCCESS,
@@ -93,3 +94,8 @@ export const logoutInitiate = () => {
          .catch((error) => dispatch(logoutError(error.message)));
    };
 };
+
+export const addToBasket = (item) => ({
+   type: ADD_TO_BASKET,
+   payload: item,
+});

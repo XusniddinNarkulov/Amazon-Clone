@@ -1,4 +1,5 @@
 import {
+   ADD_TO_BASKET,
    LOGIN_FAIL,
    LOGIN_START,
    LOGIN_SUCCESS,
@@ -54,6 +55,12 @@ export const basketReducer = (state = initialState, { type, payload }) => {
          return {
             ...state,
             user: payload,
+         };
+
+      case ADD_TO_BASKET:
+         return {
+            ...state,
+            basket: [...state.basket, payload],
          };
 
       default:
