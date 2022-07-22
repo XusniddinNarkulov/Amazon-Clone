@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import { auth } from "./utils/firebase";
 import SingleProduct from "./pages/SingleProduct/SingleProduct";
+import Checkout from "./pages/Checkout/Checkout";
 
 function App(props) {
    const { setUser } = props;
@@ -33,6 +34,7 @@ function App(props) {
                <Route path="/login" element={<Login />} />
                <Route path="/register" element={<Register />} />
                <Route path="/products/:id" element={<SingleProduct />} />
+               <Route path="/checkout" element={<Checkout />} />
             </Routes>
          </div>
       </BrowserRouter>
