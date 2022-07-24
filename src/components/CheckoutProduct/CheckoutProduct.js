@@ -2,13 +2,16 @@ import ShoppingCartOutlined from "@mui/icons-material/ShoppingCartOutlined";
 import React from "react";
 import { connect } from "react-redux";
 import "./CheckoutProduct.css";
+import { removeFromBasket } from "../../redux/action";
 
 export const CheckoutProduct = (props) => {
-   console.log(props);
+   // console.log(props);
    const { basket } = props.data;
+   const { removeFromBasket } = props;
 
-   const removeItemFromBasket = (id) =>
-      basket.filter((item, key) => item.id !== id);
+   const removeItemFromBasket = (id) => {
+      removeFromBasket(id);
+   };
 
    return basket.map((item, key) => {
       const { id, title, image, rating, price } = item;
@@ -25,7 +28,7 @@ export const CheckoutProduct = (props) => {
                   {Array(rating)
                      .fill()
                      .map((_, index) => (
-                        <p>⭐</p>
+                        <p key={index}>⭐</p>
                      ))}
                </div>
                <button onClick={() => removeItemFromBasket(id)}>
@@ -42,6 +45,6 @@ export const CheckoutProduct = (props) => {
 
 const mapStateToProps = (state) => state;
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { removeFromBasket };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutProduct);

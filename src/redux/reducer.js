@@ -9,6 +9,7 @@ import {
    REGISTER_FAIL,
    REGISTER_START,
    REGISTER_SUCCESS,
+   REMOVE_FROM_BASKET,
    SET_USER,
 } from "./actionTypes";
 
@@ -61,6 +62,14 @@ export const basketReducer = (state = initialState, { type, payload }) => {
          return {
             ...state,
             basket: [...state.basket, payload],
+         };
+      case REMOVE_FROM_BASKET:
+         let updatedBasket = [...state.basket];
+         const index = state.basket.findIndex((item) => item.id === payload.id);
+         updatedBasket.splice(index, 1);
+         return {
+            ...state,
+            basket: updatedBasket,
          };
 
       default:

@@ -10,6 +10,7 @@ import {
    REGISTER_FAIL,
    REGISTER_START,
    REGISTER_SUCCESS,
+   REMOVE_FROM_BASKET,
    SET_USER,
 } from "./actionTypes";
 
@@ -98,4 +99,9 @@ export const logoutInitiate = () => {
 export const addToBasket = (item) => ({
    type: ADD_TO_BASKET,
    payload: item,
+});
+
+export const removeFromBasket = (id) => ({
+   type: REMOVE_FROM_BASKET,
+   payload: { id },
 });
