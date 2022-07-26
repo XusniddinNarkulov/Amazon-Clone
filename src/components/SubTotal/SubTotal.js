@@ -11,7 +11,7 @@ export const SubTotal = (props) => {
    const navigate = useNavigate();
 
    const handleCheckout = () => {
-      if (user) {
+      if (user && basket.length > 0) {
          navigate("/payment");
       } else {
          navigate("/login");
